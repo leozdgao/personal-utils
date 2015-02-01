@@ -1,0 +1,48 @@
+<!-- <!DOCTYPE html> -->
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<style>
+		.drag {
+			background-color: #000;
+			position: absolute;
+
+			width: 100px;
+			height: 100px;
+		}
+		#test1 {
+			top: 200px;
+			left: 500px;
+		}
+		#test2 {
+			top: 100px;
+			left: 100px;
+		}
+	</style>
+	<script src="frontend/draggable.js"></script>
+	<title>Test</title>
+</head>
+<body>
+	<div id="test1" class="drag"><div id="firedrag"><h1>test</h1></div></div>
+	<div id="test2" class="drag"></div>
+	<script>
+
+		window.onload = function() {
+
+			// var drags = document.querySelectorAll('.drag');
+			var test1 = document.getElementById('test1');
+			var fire = document.getElementById('firedrag');
+
+			draggable.enableDraggable(test1, fire);
+			// for (var i = 0; i < drags.length; i++) {
+			// 	draggable.enableDraggable(drags[i]);
+			// }
+			// document.onclick = function() {
+
+			// 	console.log(document.documentElement.clientHeight);
+			// 	console.log(document.body.clientHeight);
+			// };
+		};
+	</script>
+</body>
+</html>
