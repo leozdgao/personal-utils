@@ -55,10 +55,10 @@ var draggable = {
 			};
 
 			// 释放鼠标
-			oTitle.onmouseup = function() {
+			document.onmouseup = function() {
 				
 				document.onmousemove = null;
-				oTitle.onmouseup = null;
+				document.onmouseup = null;
 			};
 		};
 	},
