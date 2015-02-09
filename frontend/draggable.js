@@ -40,8 +40,8 @@ var draggable = {
 					posY = clientY - (disY - offsetY);
 
 				// 限制可拖动区域
-				var maxX = document.body.clientWidth || document.documentElement.clientWidth - oDrag.offsetWidth;
-				var maxY = document.body.clientHeight || document.documentElement.clientHeight - oDrag.offsetHeight;
+				var maxX = (document.body.clientWidth || document.documentElement.clientWidth) - oDrag.offsetWidth;
+				var maxY = (document.body.clientHeight || document.documentElement.clientHeight) - oDrag.offsetHeight;
 
 				if(posX < 0) posX = 0;
 				else if(posX > maxX) posX = maxX;
