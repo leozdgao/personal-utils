@@ -5,6 +5,9 @@
 // 	data: {},
 // 	timeout: 0
 // }
+
+// function(err, res, status, xhr)
+
 function ajax(opts, cb) {
 
 	opts = opts || {};
@@ -55,6 +58,6 @@ function ajax(opts, cb) {
 	xhr.timeout = opts.timeout || 3000;
 	xhr.ontimeout = function() {
 
-		cb.call(null, new Error('timeout'), xhr.status, xhr);
+		cb.call(null, new Error('timeout'), void(0), xhr.status, xhr);
 	};
 }
