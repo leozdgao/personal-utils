@@ -23,7 +23,7 @@ function ajax(opts, cb) {
 	xhr.onreadystatechange = function() {
 		if(xhr.readyState === 4) {
 
-			var res;
+			var res = {};
 			if(ct === 'application/json') {
 
 				try {
@@ -37,7 +37,7 @@ function ajax(opts, cb) {
 			}
 			else if(ct === 'application/x-www-form-urlencoded') {
 
-				var kvs = xhr.response.split('&'), res = {};
+				var kvs = xhr.response.split('&');
 				for (var i = 0, l = kvs.length; i < l; i++) {
 					
 					var kv = kvs[0].split('=');
