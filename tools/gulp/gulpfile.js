@@ -1,15 +1,10 @@
+'use strict';
+
 var gulp = require('gulp');
 var path = require('path');
 var files = require('./files');
 
-// release
-gulp.task('default', ['release']);
-gulp.task('release', ['assets']); // add jslint and uTest later maybe
-gulp.task('assets', ['assets:css', 'assets:js']);
-
-gulp.task('dev', ['concat', 'watch', 'server']);
-gulp.task('concat', ['concat:css', 'concat:js']);
-
+// load dependencies
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var minify = require('gulp-minify-css'); //css
@@ -17,7 +12,23 @@ var uglify = require('gulp-uglify'); //js
 var autoprefixer = require('gulp-autoprefixer');
 var livereload = require('gulp-livereload');
 var nodemon = require('gulp-nodemon');
+var jshint = require('gulp-jshint');
 
+// release
+gulp.task('default', ['release']);
+gulp.task('release', ['lint']); // add jslint and uTest later maybe
+gulp.task('lint', ['assets'], function() {
+
+	return gulp.src(path.resolve(files.destLib, files.destJs))
+			.pipe(jshint())
+			.pipe(jshint.reporter('jshint-stylish')); // { verbose: true }
+});
+gulp.task('assets', ['assets:css', 'assets:js']);
+
+gulp.task('dev', ['concat', 'watch', 'server']);
+gulp.task('concat', ['concat:css', 'concat:js']);
+
+//
 gulp.task('server', function() {
 
 	return nodemon({
