@@ -1,7 +1,6 @@
 'use strict';
 
 var gulp = require('gulp');
-var path = require('path');
 var files = require('./files');
 
 // load dependencies
@@ -13,22 +12,51 @@ var autoprefixer = require('gulp-autoprefixer');
 var livereload = require('gulp-livereload');
 var nodemon = require('gulp-nodemon');
 var jshint = require('gulp-jshint');
+var del = require('del');
 
 // release
 gulp.task('default', ['release']);
-gulp.task('release', ['lint']); // add jslint and uTest later maybe
-gulp.task('lint', ['assets'], function() {
+gulp.task('release', ['release:css', 'release:js']); // add jslint and uTest later maybe
 
-	return gulp.src(path.resolve(files.destLib, files.destJs))
-			.pipe(jshint())
-			.pipe(jshint.reporter('jshint-stylish')); // { verbose: true }
+gulp.task('clean', function(cb) {
+
+	del([files.release], cb);
 });
-gulp.task('assets', ['assets:css', 'assets:js']);
+
+gulp.task('release:css', ['clean'], function() {
+
+	//css
+	return gulp.src(files.css)
+			.pipe(concat(files.destCss))
+            .pipe(gulp.dest(files.destLib))
+			.pipe(autoprefixer({
+				browsers: ['> 5%', 'last 5 version', 'ie 8']	
+			})) // auto-prefix
+			.pipe(rename({suffix:'.min'}))
+			.pipe(minify())
+			.pipe(gulp.dest(files.release));
+});
+
+gulp.task('release:js', ['clean'], function() {
+
+	//js
+    return gulp.src(files.js)
+            .pipe(concat(files.destJs))
+            .pipe(gulp.dest(files.destLib)) 
+			//js hint before uglify
+			.pipe(jshint())
+			.pipe(jshint.reporter('jshint-stylish'))
+			//uglify
+			.pipe(rename({suffix:'.min'}))
+			.pipe(uglify())
+			.pipe(gulp.dest(files.release));
+});
+
+//-----------------------------------------------> for dev
 
 gulp.task('dev', ['concat', 'watch', 'server']);
 gulp.task('concat', ['concat:css', 'concat:js']);
 
-//
 gulp.task('server', function() {
 
 	return nodemon({
@@ -53,27 +81,6 @@ gulp.task('concat:js', function() {
 			.pipe(concat(files.destJs))
 			.pipe(gulp.dest(files.destLib))
 			.pipe(livereload());
-});
-
-gulp.task('assets:css', ['concat:css'], function() {
-
-	//css
-	return gulp.src(path.resolve(files.destLib, files.destCss))
-			.pipe(autoprefixer({
-				browsers: ['> 5%', 'last 5 version', 'ie 8']	
-			})) // auto-prefix
-			.pipe(rename({suffix:'.min'}))
-			.pipe(minify())
-			.pipe(gulp.dest(files.release));
-});
-
-gulp.task('assets:js', ['concat:js'], function() {
-
-	//js
-	return gulp.src(path.resolve(files.destLib, files.destJs))
-			.pipe(rename({suffix:'.min'}))
-			.pipe(uglify())
-			.pipe(gulp.dest(files.release));
 });
 
 gulp.task('reloadView', function() {
