@@ -48,7 +48,7 @@ function ajax(opts, cb) {
 
 						res[kv[0]] = kv[1];
 					}
-				};
+				}
 			}
 
 			cb.call(null, null, res, xhr.status, xhr);
