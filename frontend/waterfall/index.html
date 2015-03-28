@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test waterfall</title>
+    <style>
+    .wf-container {
+        position: relative;
+        width: 80%;
+        margin: 0 auto;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    .wf-box {
+        position: absolute;
+        background: #ccc;
+        width: 300px;
+        margin: 10px;
+    }
+    .h_100 { height: 100px; }
+    .h_300 { height: 300px; }
+    .h_500 { height: 500px; }
+    .h_400 { height: 400px; }
+    .h_350 { height: 350px; }
+    </style>
+</head>
+<body>
+    <div class="wf-container">
+        <div class="wf-box h_400"></div>
+        <div class="wf-box h_300"></div>
+        <div class="wf-box h_100"></div>
+        <div class="wf-box h_500"></div>
+        <div class="wf-box h_100"></div>
+        <div class="wf-box h_350"></div>
+        <div class="wf-box h_100"></div>
+        <div class="wf-box h_400"></div>
+        <div class="wf-box h_300"></div>
+        <div class="wf-box h_300"></div>
+    </div>
+    <script src="waterfall.js"></script>
+    <script>
+        window.onload = function() {
+            var waterfall = new Waterfall(), clr;
+
+            window.onresize = function() {
+                if(clr) clearTimeout(clr);
+
+                clr = setTimeout(function() {
+                    waterfall.compose();
+                }, 500);
+            };
+        };
+    </script>
+</body>
+</html>
