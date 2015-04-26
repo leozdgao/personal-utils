@@ -1,12 +1,20 @@
 
-// Like EventEmitter in node.js
-
+/**
+ * Like EventEmitter in node.js
+ */
 function EventEmitter () {
 
     this.eventHandles = {};
 }
 
-// add listener
+
+/**
+ * Add listener for specific event.
+ * 
+ * @param  {String} event - name of the event.
+ * @param  {Function} callback - handler which will be invoked when the event fired.
+ * @return {Number} index of listener, it will be used when you remove this handler.
+ */
 EventEmitter.prototype.on = function(event, callback) {
 
     var handlers = this.eventHandles[event] || [];
@@ -15,7 +23,11 @@ EventEmitter.prototype.on = function(event, callback) {
     return handlers.length - 1;
 };
 
-// fire event
+/**
+ * Trigger event.
+ * 
+ * @param  {String} event - name of the event.
+ */
 EventEmitter.prototype.emit = function(event) {
 
     if(this.eventHandles[event]) {
@@ -30,7 +42,12 @@ EventEmitter.prototype.emit = function(event) {
     }
 };
 
-// remove listener
+/**
+ * Remove the handler of the event according the index which is returned when it attached.
+ * 
+ * @param  {String} event - name of the event.
+ * @param  {Number} index - index of the handler.
+ */
 EventEmitter.prototype.remove = function(event, index) {
 
     var handlers = this.eventHandles[event] || [];
