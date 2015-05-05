@@ -1,9 +1,14 @@
 
 /**
  * Like EventEmitter in node.js
+ *
+ * @constructor
  */
 function EventEmitter () {
 
+    /**
+     * @var {Object}
+     */
     this.eventHandles = {};
 }
 

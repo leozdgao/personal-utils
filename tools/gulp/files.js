@@ -19,5 +19,6 @@ module.exports = {
 	destJs: 'script.js',
 	destCss: 'style.css',
 	destLib: './assets/release',
-	release: './assets/release'
+	release: './assets/release',
+  entry: './testpage.html'
 };
