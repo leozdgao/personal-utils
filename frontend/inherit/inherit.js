@@ -41,3 +41,24 @@ exports.mixin = function (reciever, supplier, entire) {
         }
     }
 };
+
+exports.inherit = function (Ctor, Parent) {
+    // check es5
+    if(Object.create) {
+        Ctor.prototype = Object.create(Parent.prototype, {
+            constructor: {
+                enumerable: false,
+                writable: true,
+                configurable: true,
+                value: Ctor
+            }
+        });
+    }
+    // compatibility for es3
+    else {
+        Ctor.prototype = new Parent();
+        Ctor.prototype.constructor = Ctor;    
+    }
+    
+    return Ctor;
+};
