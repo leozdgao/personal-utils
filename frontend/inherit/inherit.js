@@ -63,8 +63,8 @@ exports.mixin = function (reciever, supplier, entire) {
  *     dog.sayName(); // 'dog'
  *     console.log(dog instanceof Animal) // true;
  * 
- * @param {Function} child - The child function whose prototype will inherit from the parent's prototype.
- * @param {Function} parent - The parent function whose prototype will be inherited.
+ * @param {Function} Ctor - The child function whose prototype will inherit from the parent's prototype.
+ * @param {Function} Parent - The parent function whose prototype will be inherited.
  */
 exports.inherit = function (Ctor, Parent) {
     // check es5
