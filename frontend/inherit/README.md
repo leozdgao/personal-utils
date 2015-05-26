@@ -181,3 +181,10 @@ var dog = new Dog();
 dog.sayName(); // 'dog'
 console.log(dog instanceof Animal) // false;
 ```
+
+In ES6, a built-in method `Object.assign` do the similar thing.
+
+> The Object.assign() method is used to copy the values of all enumerable own properties from one or more source objects to a target object. It will return the target object.
+
+Notice it only copy all enumerable own properties, and it only copy value, so if you want to copy the descriptor of the property you still need 
+`Object.getOwnPropertyDescriptor` and `Object.defineProperty`.
