@@ -42,6 +42,30 @@ exports.mixin = function (reciever, supplier, entire) {
     }
 };
 
+/**
+ * Inherit in pseudo-class mode, the prototype chain will be involved and the instance of child will be an 
+ * instance of parent just like class inheritance.
+ * 
+ * Example:
+ *     function Animal (name) {
+ *         this.name = name;   
+ *     }
+ *     Animal.prototype.sayName = function () {
+ *         console.log(this.name);
+ *     }
+ *     function Dog () {
+ *         // use super constructor to initailize properties if it is necessary.
+ *         Animal.call(this, 'dog');
+ *     }
+ *     inherit(Dog, Animal);
+ * 
+ *     var dog = new Dog();
+ *     dog.sayName(); // 'dog'
+ *     console.log(dog instanceof Animal) // true;
+ * 
+ * @param {Function} child - The child function whose prototype will inherit from the parent's prototype.
+ * @param {Function} parent - The parent function whose prototype will be inherited.
+ */
 exports.inherit = function (Ctor, Parent) {
     // check es5
     if(Object.create) {

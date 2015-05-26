@@ -55,7 +55,7 @@ Animal.prototype = {
 
 OK, let's start to discuss about the inheritance in JavaScript.
 
-**Pseudo-Class**
+**Pseudo-Class Mode**
 
 There is no explicit implement of class in JavaScript, even in ES6, the `class` is only the grammar sugar for prototype-based inheritance. So 
 without the ES6 sugar, we try to implement the inheritance like a class which based on prototype.
@@ -128,19 +128,44 @@ console.log(dog instanceof Animal); // true
 ```
 
 
-**Mixin**
+**Mixin Mode**
 
-Inherit in mixin mode, the reciever will inherit own properties from the supplier, but the prototype
-chain will be not involved, so the reciever will not be the instance of supplier's constructor.
+Another way to inherit is called 'mixin'. The difference between the 'pseudo-class' and 'mixin' is that the mixin mode does not base on 
+prototype, it has a reciever object and a supplier object ,the reciever will recieve the own properties from the supplier.
 
+Notice the property is a container of the value or a pair of accessors. So if your environment support ES5, it's better to use `Object.getOwnPropertyDescriptor` and 
+`Object.defineProperty`, or you can just use the shadow copy.
 
+```javascript
+function mixin (reciever, supplier, entire) {
+    var iterator = entire ? Object.getOwnPropertyNames : Object.keys;
+    // check es5
+    if (Object.getOwnPropertyDescriptor) {
+        iterator.call(null, supplier).forEach(function (key) {
+            var descriptor = Object.getOwnPropertyDescriptor(supplier, key);
+            Object.defineProperty(reciever, key, descriptor);
+        });
+    }
+    // compatibility for es3, use shadow copy
+    else {
+        for (var key in supplier) if (supplier.hasOwnProperty(key)) {
+            reciever[key] = supplier[key];
+        }
+    }
+}
+```
 
+There is a flag called 'entire', it is used to decide recieving the properties which are not enumerable or not (It works only if your environment support ES5). Commonly 
+we let the prototype of child as a reciever and let the prototype of parent as a supplier.
+
+Notice that the child's prototype object doesn't have a implicit reference to parent's prototype, so child instance will only have the properties on its parent but will 
+not have the properties from its grandfather. And the child instance will not be an instance of it's parent. If you don't care about that, just use it.
 
 Let's check this implement:
 
 ```javascript
 function Animal (name) {
-    this.name = name;   
+    this.name = name;
 }
 Animal.prototype.sayName = function () {
     console.log(this.name);
