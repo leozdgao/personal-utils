@@ -1,0 +1,16 @@
+{
+  "name": "githubapi",
+  "version": "1.0.0",
+  "description": "test github api",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "leozdgao",
+  "license": "MIT",
+  "dependencies": {
+    "connect": "^3.3.5",
+    "request": "^2.55.0",
+    "serve-static": "^1.9.2"
+  }
+}

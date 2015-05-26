@@ -1,37 +1,62 @@
 
-// Like EventEmitter in node.js
-
+/**
+ * Like EventEmitter in node.js
+ *
+ * @constructor
+ */
 function EventEmitter () {
 
-	this.eventHandles = {};
+    /**
+     * @var {Object}
+     */
+    this.eventHandles = {};
 }
 
-// add listener
+
+/**
+ * Add listener for specific event.
+ * 
+ * @param  {String} event - name of the event.
+ * @param  {Function} callback - handler which will be invoked when the event fired.
+ * @return {Number} index of listener, it will be used when you remove this handler.
+ */
 EventEmitter.prototype.on = function(event, callback) {
 
-	var handlers = this.eventHandles[event] || [];
-	handlers.push(callback);
+    var handlers = this.eventHandles[event] || [];
+    handlers.push(callback);
 
-	return handlers.length - 1;
+    return handlers.length - 1;
 };
 
-// fire event
+/**
+ * Trigger event.
+ * 
+ * @param  {String} event - name of the event.
+ */
 EventEmitter.prototype.emit = function(event) {
 
-	for(var i = 0; i < this.eventHandles.length; i++) {
+    if(this.eventHandles[event]) {
+        
+        for(var i = 0, l = this.eventHandles.length; i < l; i++) {
 
-		var args = Array.prototype.slice(1);
-		var handler = this.eventHandles[i];
-		
-		handler.apply(null, args);
-	}
+            var args = Array.prototype.slice(1);
+            var handler = this.eventHandles[i];
+            
+            handler.apply(null, args);
+        }   
+    }
 };
 
-// remove listener
+/**
+ * Remove the handler of the event according the index which is returned when it attached.
+ * 
+ * @param  {String} event - name of the event.
+ * @param  {Number} index - index of the handler.
+ */
 EventEmitter.prototype.remove = function(event, index) {
 
-	var handlers = this.eventHandles[event] || [];
+    var handlers = this.eventHandles[event] || [];
 
-	handlers.splice(index);
+    handlers.splice(index);
 };
 
