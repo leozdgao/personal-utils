@@ -1,0 +1,59 @@
+@keyframes check {
+	0% {
+		height: 0; width: 0;
+	}
+	25% {
+		height: 0; width: .4em;
+	}
+	50% {
+		height: .8em; width: .4em;
+	}
+}
+
+.checkbox .cb-control {
+	display: none;
+}
+
+.cb-control:checked + label:after {
+	display: inline-block;
+	animation: check 0.8s;
+}
+
+.checkbox label {
+	line-height: 1.2em;
+	vertical-align: middle;
+	position: relative;
+}
+
+.checkbox label:hover {
+	cursor: pointer;
+}
+
+.checkbox label:before {
+	content: '';
+	vertical-align: middle;
+	display: inline-block;
+	width: 1.2em;
+	height: 1.2em;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: .2em;
+}
+.checkbox label:hover:before {
+	box-shadow: 0 0 1px #ccc;
+}
+
+.checkbox label:after {
+	content: '';
+	display: none;
+	position: absolute;
+	width: .4em;
+	height: .8em;
+	left:  .4em;
+	top: .15em;
+	border-top: .3em solid steelblue;
+	border-right: .3em solid steelblue;
+	transform: rotate(135deg) scaleX(-1);
+	transform-origin: left top;
+	transition: all 1s ease;
+}

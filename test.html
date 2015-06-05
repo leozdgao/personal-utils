@@ -19,12 +19,19 @@
 			left: 100px;
 		}
 	</style>
-	<script src="frontend/draggable.js"></script>
+	<script src="frontend/basic/draggable.js"></script>
+	<link rel="stylesheet" href="frontend/animation/check.css">
 	<title>Test</title>
 </head>
 <body>
 	<div id="test1" class="drag"><div id="firedrag"><h1>test</h1></div></div>
 	<div id="test2" class="drag"></div>
+	<div id="check-demo">
+		<div class="checkbox">
+			<input type="checkbox" id="cb-control" class="cb-control">
+			<label for="cb-control">Test</label>
+		</div>
+	</div>
 	<script>
 
 		window.onload = function() {
