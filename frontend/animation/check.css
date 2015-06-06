@@ -1,12 +1,24 @@
+@-webkit-keyframes check {
+	0% {
+		height: 0; width: 0;
+	}
+	25% {
+		height: 0; width: .3em;
+	}
+	50% {
+		height: .6em; width: .3em;
+	}
+}
+
 @keyframes check {
 	0% {
 		height: 0; width: 0;
 	}
 	25% {
-		height: 0; width: .4em;
+		height: 0; width: .3em;
 	}
 	50% {
-		height: .8em; width: .4em;
+		height: .6em; width: .3em;
 	}
 }
 
@@ -16,13 +28,14 @@
 
 .cb-control:checked + label:after {
 	display: inline-block;
-	animation: check 0.8s;
+	-webkit-animation: check 0.8s;
+	        animation: check 0.8s;
 }
 
 .checkbox label {
-	line-height: 1.2em;
-	vertical-align: middle;
+	line-height: 1.44em;
 	position: relative;
+  padding-left: 1.5em;
 }
 
 .checkbox label:hover {
@@ -31,29 +44,36 @@
 
 .checkbox label:before {
 	content: '';
-	vertical-align: middle;
+  position: absolute;
+  left: 0;
+  top: -.1em;
 	display: inline-block;
 	width: 1.2em;
 	height: 1.2em;
 	background-color: #fff;
-	border: 1px solid #ccc;
+	border: 1px solid lightsteelblue;
 	border-radius: .2em;
 }
 .checkbox label:hover:before {
-	box-shadow: 0 0 1px #ccc;
+	box-shadow: 0 0 1px lightsteelblue;
 }
 
 .checkbox label:after {
 	content: '';
 	display: none;
 	position: absolute;
-	width: .4em;
-	height: .8em;
-	left:  .4em;
-	top: .15em;
-	border-top: .3em solid steelblue;
-	border-right: .3em solid steelblue;
-	transform: rotate(135deg) scaleX(-1);
-	transform-origin: left top;
-	transition: all 1s ease;
+	width: .3em;
+	height: .6em;
+	left:  .25em;
+	top: .55em;
+	border-top: .2em solid steelblue;
+	border-right: .2em solid steelblue;
+	-webkit-transform: scaleX(-1) rotate(135deg);
+	    -ms-transform: scaleX(-1) rotate(135deg);
+	        transform: scaleX(-1) rotate(135deg);
+	-webkit-transform-origin: left top;
+	    -ms-transform-origin: left top;
+	        transform-origin: left top;
+	-webkit-transition: all 1s ease;
+	        transition: all 1s ease;
 }
