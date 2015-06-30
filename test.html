@@ -1,27 +1,28 @@
 <!-- <!DOCTYPE html> -->
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<style>
-		.drag {
-			background-color: #000;
-			position: absolute;
+    <meta charset="UTF-8">
+    <style>
+        .drag {
+            background-color: #000;
+            position: absolute;
 
-			width: 100px;
-			height: 100px;
-		}
-		#test1 {
-			top: 200px;
-			left: 500px;
-		}
-		#test2 {
-			top: 100px;
-			left: 100px;
-		}
-	</style>
-	<script src="frontend/basic/draggable.js"></script>
-	<link rel="stylesheet" href="frontend/animation/check.css">
-	<title>Test</title>
+            width: 100px;
+            height: 100px;
+        }
+        #test1 {
+            top: 200px;
+            left: 500px;
+        }
+        #test2 {
+            top: 100px;
+            left: 100px;
+        }
+    </style>
+    <script src="frontend/basic/draggable.js"></script>
+    <link rel="stylesheet" href="frontend/animation/check.css">
+    <link rel="stylesheet" href="frontend/animation/modal.css">
+    <title>Test</title>
 </head>
 <body>
 	<div id="test1" class="drag"><div id="firedrag"><h1>test</h1></div></div>
@@ -43,5 +44,71 @@
 
 	</div>
 	<script src="traverse.js" charset="utf-8"></script>
+    <div id="test1" class="drag"><div id="firedrag"><h1>test</h1></div></div>
+    <div id="test2" class="drag"></div>
+    <div id="check-demo">
+        <div class="checkbox">
+            <input type="checkbox" id="cb-control" class="cb-control">
+            <label for="cb-control">Test</label>
+        </div>
+    </div>
+    <div id="modal-demo">
+        <button id="btn-toggle">Toggle</button>
+    </div>
+    <div class="backdrop"></div>
+    <div class="modal"></div>
+    <script>
+
+        // window.onload = function() {
+				//
+        //     // var drags = document.querySelectorAll('.drag');
+        //     var test1 = document.getElementById('test1');
+        //     var fire = document.getElementById('firedrag');
+				//
+        //     draggable.enableDraggable(test1, fire);
+        //     // for (var i = 0; i < drags.length; i++) {
+        //     //  draggable.enableDraggable(drags[i]);
+        //     // }
+        //     // document.onclick = function() {
+				//
+        //     //  console.log(document.documentElement.clientHeight);
+        //     //  console.log(document.body.clientHeight);
+        //     // };
+        //     var backdrop = document.querySelector('.backdrop');
+        //         modal = document.querySelector('.modal');
+        //         btnToggle = document.getElementById('btn-toggle'),
+        //         showed = false;
+				//
+        //     btnToggle.addEventListener('click', function(e) {
+        //         toggle();
+        //     });
+        //     backdrop.addEventListener('click', function(e) {
+        //         toggle();
+        //     });
+				//
+        //     function toggle() {
+        //         if(!showed) showModal();
+        //         else hideModal();
+				//
+        //         showed = !showed;
+        //     }
+				//
+        //     function showModal() {
+        //         backdrop.className = "backdrop show";
+        //         modal.className = "modal show";
+        //         setTimeout(function() {
+        //             modal.className = "modal show scaleIn";
+        //         }, 0)
+        //     }
+				//
+        //     function hideModal() {
+        //         backdrop.className = "backdrop";
+        //         modal.className = "modal show";
+        //         setTimeout(function() {
+        //             modal.className = "modal";
+        //         }, 300);
+        //     }
+        // };
+    </script>
 </body>
 </html>
